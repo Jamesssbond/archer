@@ -6,6 +6,10 @@
     width: auto;
     height: auto;
 }
+.box .container{
+    width: auto;
+    height: auto;
+}
 .inppp{
     border:groove;
     height: 35px;
