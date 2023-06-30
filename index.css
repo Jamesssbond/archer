@@ -1,0 +1,12 @@
+.namep{background-color: black;
+    color: white;
+    padding: 10px;
+}
+.inppp{
+    border:groove;
+    height: 35px;
+}
+.btn btn-outline-primary{
+    margin-right:100px;
+    align-items: center;
+}
