@@ -2,6 +2,10 @@
     color: white;
     padding: 10px;
 }
+.box{
+    width: auto;
+    height: auto;
+}
 .inppp{
     border:groove;
     height: 35px;
