@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<body>
+    <h1>4H5-6016-000</h1>
+    <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <input id="inp1" type="number" class="form-control" placeholder="Current stock" onkeyup="addData()" aria-label="Username" aria-describedby="basic-addon1">
+        <button type="button" class="btn btn-outline-primary" onclick="addData()">Forcast</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">PLAN</th>
+            <th scope="col">06/09</th>
+            <th scope="col">07/09</th>
+            <th scope="col">09/09</th>
+            <th scope="col">10/09</th>
+            <th scope="col">11/09</th>
+            <th scope="col">12/09</th>
+            <th scope="col">13/09</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td><input id="inpd1" onkeyup="addData()" type="number" class="form-control" placeholder="Current stock" aria-label="Username" aria-describedby="basic-addon1"></td>
+            <td><input id="inpd2" onkeyup="addData()" type="number" class="form-control" placeholder="Current stock" aria-label="Username" aria-describedby="basic-addon1"></td>
+            <td><input id="inpd3" onkeyup="addData()" type="number" class="form-control" placeholder="Current stock" aria-label="Username" aria-describedby="basic-addon1"></td>
+            <td><input id="inpd4" onkeyup="addData()" type="number" class="form-control" placeholder="Current stock" aria-label="Username" aria-describedby="basic-addon1"></td>
+            <td><input id="inpd5" onkeyup="addData()" type="number" class="form-control" placeholder="Current stock" aria-label="Username" aria-describedby="basic-addon1"></td>
+            <td><input id="inpd6" onkeyup="addData()" type="number" class="form-control" placeholder="Current stock" aria-label="Username" aria-describedby="basic-addon1"></td>
+            <td><input id="inpd7" onkeyup="addData()" type="number" class="form-control" placeholder="Current stock" aria-label="Username" aria-describedby="basic-addon1"></td>
+            
+          </tr>
+        </tbody>
+      </table>
+      <script>
+        const ctx = document.getElementById('myChart');
+        const data = {
+              labels: [
+              
+            '20240907',
+            '20240909',
+            '20240910',
+            '20240911',
+            '20240912',
+            '20240913',
+            '20240914'
+          
+              ],
+              datasets: [ 
+              
+            ]
+            };
+
+            const config = {
+              type: 'scatter',
+              data: data,
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  },
+              
+                }
+              }
+            };
+
+
+
+function markdel(dt_del,max){
+  var data2={
+      type: 'line',
+      label: 'DELV',
+      borderDash: [5],
+      data: [
+      {
+        x: dt_del,
+        y: 0
+      },
+      {
+        x: dt_del,
+        y: max
+      },
+      
+      ],
+      fill: false,
+      borderColor: 'rgb(254, 162, 25)',
+      
+  };
+  return data2;
+}
+
+function markx(max){
+  var data2={
+      type: 'line',
+      // label: 'DELV',
+      borderDash: [5],
+      data:[max,max,max,max,max,max,max],
+      fill: false,
+      borderColor: 'rgb(254, 62, 25)',
+      
+  };
+  return data2;
+}
+
+function setplan(arryplan,color,bg){
+  var data2={
+    type: 'line',
+    label: 'PLAN USE 4H5-6016-000',
+    borderDash: [5],
+    data: arryplan,
+    fill: true,
+    borderColor: color,
+    backgroundColor : bg,
+    
+};
+  return data2;
+}
+
+// var data2=markdel('20240906',700);
+// data.datasets.push(data2);
+var data2=markdel('20240907',700);
+data.datasets.push(data2);
+var data2=markdel('20240911',700);
+data.datasets.push(data2);
+var data2=markdel('20240914',700);
+data.datasets.push(data2);
+// var data2=markdel('20240916',500);
+// data.datasets.push(data2);
+// console.log(data.datasets);
+var planuse=[100,100,125,125,100,125,100];
+// ,100,100,100]
+var plandel=[0,0,0,360,0,0,360];
+// ,0,0,0]
+var crrstr=500;
+var fc_stock=[];
+
+
+
+for (let i = 0; i < planuse.length && i<7; i++) {
+    // console.log(planuse[i]);
+    crrstr=crrstr-planuse[i];
+    crrstr=crrstr+plandel[i];
+    fc_stock.push(crrstr);
+    document.getElementById('inpd'+(i+1)).value=planuse[i];
+    // console.log(planuse[i]);
+    // console.log(document.getElementById('inpd'+(i+1)).placeholder);
+
+}
+// console.log(fc_stock);
+var data2=setplan(planuse,'rgb(54, 162, 235)','rgb(0, 0, 205,0.2)');
+data.datasets.push(data2);
+var data2=setplan(fc_stock,'rgb(154, 162, 35)','rgb(200, 200, 0,0.4)');
+data.datasets.push(data2);
+var data2=markx(Math.max(...fc_stock));
+data.datasets.push(data2);
+let mixedChart = new Chart(ctx, config);
+
+function addData(){
+  // let updatedData = Array(10).fill().map(getRandomValue);
+  planuse
+  for (let i = 0; i < planuse.length; i++) {
+    planuse[i]=document.getElementById('inpd'+(i+1)).value;
+  }
+  console.log(planuse);
+  var crrstr=document.getElementById("inp1").value;
+  var fc_stock=[];
+  for (let i = 0; i < planuse.length; i++) {
+      // console.log(planuse[i]);
+      
+      crrstr=crrstr-planuse[i];
+      
+      crrstr=crrstr+plandel[i];
+      // console.log(crrstr);
+      fc_stock.push(crrstr)
+  }
+    console.log(mixedChart.config._config.data.datasets[3].data);
+
+    let numArr = [Math.max(...fc_stock), Math.max(...fc_stock), Math.max(...fc_stock), Math.max(...fc_stock), Math.max(...fc_stock),Math.max(...fc_stock), Math.max(...fc_stock)];
+    // console.log(arrayEmpty);
+    mixedChart.config._config.data.datasets[5].data=numArr;
+    mixedChart.config._config.data.datasets[4].data=fc_stock;
+    mixedChart.update();
+}
+</script>
+</body>
+</html>
